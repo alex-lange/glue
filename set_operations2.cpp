@@ -55,7 +55,11 @@ vset set_intersection( vset S, vset R, int arraySize){
 // completemnts the set
 vset set_complement( vset S, int arraySize){
   vset T;
-  T = ~S;
+  //  cout << "S = " << S << endl;
+  //  cout << ((shifter << arraySize) - 1) << endl;
+  T = ~S & ((shifter << arraySize) - 1);
+  //  cout << "T = " << T << endl;
+  //cout << "S = " << S << endl;
   return T;
 }
 
@@ -68,7 +72,7 @@ int set_order( vset S, int arraySize ){
       S &= S - 1;
     }
     order += c;
-  }
+    
   return order;
   }*/
 
@@ -98,9 +102,9 @@ bool in_set( int u, uint64_t S ){
 
 // gets number of bits in set using kernighan's method
 // (when S is just an int)
-int set_order( int S ){
+int set_order( uint64_t S ){
   int c;
-  for( c = 0; S; c++ ){
+  for( c = 0; S != empty; c++ ){
     S &= S - 1;
   }
   return c;

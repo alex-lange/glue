@@ -239,13 +239,19 @@ void drop_v(){
 void remove_e( ostream * out ){
   bool found = false;
   int v = y_g->order();
+  cerr << v << endl;
   for( int i = 0; i < v - 1 && !found; i++ ){
     for( int j = i + 1; j < v && !found; j++ ){
-      
       if( y_g->is_edge( i, j ) ){
 	y_g->remove_edge( i, j );
 	
-	if( y_g->max_independent_set( ).size() < is ){
+	
+	vector<int> mis = y_g->max_independent_set();
+	if( mis.size() < is ){
+	  for( vector<int>::iterator it = mis.begin(); it != mis.end(); it++ ){
+	    cerr << *it << " ";
+	  }
+	  cerr << endl;
 	  add_graph( y_g->to_g6() );
 	 *out << g_count << " (" << i 
 	      << " " << j << ") " << endl;
@@ -366,6 +372,7 @@ int main( int argc, char *argv[] ){
 
 
   cerr << "****************" << endl;
+  cerr << "is = " << is << endl;
   cerr << "d = " << d << endl;
 
   // get the Y (k_{n-1}) graphs

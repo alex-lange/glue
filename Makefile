@@ -51,7 +51,7 @@ CCLIBFLAGS =
 ########## End of default flags
 
 
-CPP_FILES =	g_core.cpp set_operations2.cpp glue.cpp g_is.cp add_e.cpp remove_e.cpp filter_g.cpp test_is.cpp
+CPP_FILES =	g_core.cpp set_operations2.cpp glue.cpp g_is.cp add_e.cpp remove_e.cpp filter_g.cpp test_is.cpp test.cpp
 C_FILES =	
 PS_FILES =	
 S_FILES =	
@@ -67,7 +67,7 @@ NAUTOBJ2 = 	$(nautpath)/gtnauty.o $(nautpath)/nauty.o $(nautpath)/nautil.o $(nau
 # Main targets
 #
 
-all:	glue add_e remove_e filter_g test_is
+all:	glue add_e remove_e filter_g test_is test
 
 glue:	glue.o $(OBJFILES)
 	$(CXX) $(CXXFLAGS) -o glue glue.o $(OBJFILES) $(NAUTOBJ) $(NAUTOBJ2) $(CCLIBFLAGS)
@@ -83,6 +83,9 @@ filter_g:	filter_g.o $(OBJFILES)
 
 test_is:	test_is.o $(OBJFILES)
 	$(CXX) $(CXXFLAGS) -o test_is test_is.o $(OBJFILES) $(CCLIBFLAGS)
+
+test:	test.o $(OBJFILES)
+	$(CXX) $(CXXFLAGS) -o test test.o $(OBJFILES) $(CCLIBFLAGS)
 
 
 #

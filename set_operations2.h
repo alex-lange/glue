@@ -22,6 +22,6 @@ int set_order( vset S, int arraySize );
 bool not_empty( vset S );
 int first_bit( vset S, int arraySize );
 bool in_set( int u, uint64_t S );
-int set_order( int S );
+int set_order( vset S );
 
 #endif

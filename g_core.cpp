@@ -118,8 +118,9 @@ int g::min_degree(){
 
 void g::make_complement(){
   for( int i = 0; i < n; i++ ){
-    gA[i]=set_complement( gA[i], arraySize );
+    gA[i]=set_complement( gA[i], n );
     set_delete( i, gA[i] );
+
   }
   numEdges = n*(n-1)/2 - numEdges;
 }
@@ -148,15 +149,17 @@ void g::max_clique_backtrack( int l, int k ){
   // Bounding/Tree Pruning
   int m;
   m = l + set_order( gC[l] );
+  //  cout << "gC[l] " << gC[l] << " " << set_order( gC[l] ) << endl;
   
   for( int x = 0; x < n; x++ ){
+    //    cout << "x = " << x << endl;
     // bound
     if( m <= optSize ) return;
-    if( cl & 1 ){
+    if( in_set( x, cl )){
       X[l] = x;
       max_clique_backtrack( l + 1, k );
     }
-    cl >>= 1;
+      //    cl >>= 1;
   }
 }
 
