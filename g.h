@@ -32,6 +32,7 @@ class g {
   bool is_edge( int u, int v ) const;
   int min_degree();
   int degree( int v );
+  vector<int> neighbors( int v );
   vector<int> max_clique( bool print = false, int k = -1 );
   vector<int> max_independent_set( bool print = false, int k = -1);
   bool has_clique( int k, bool is = false );

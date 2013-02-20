@@ -236,6 +236,20 @@ void drop_v(){
   }
 }
 
+void remove_neighbors( ostream * out ){
+  int num_vs = y_g ->order();
+  for( int i = 0; i < num_vs; i++ ){
+    g y_copy = *y_g;
+    vector<int> neighbors = y_copy.neighbors( i );
+    if( y_copy.degree(i) != neighbors.size() ){
+      cerr << "Error with neighbors" << endl;
+    }
+    neighbors.push_back(i);
+    y_copy.remove_vs( neighbors, neighbors.size() );
+    add_graph( y_copy.to_g6() );
+  }
+}
+
 void remove_e( ostream * out ){
   bool found = false;
   int v = y_g->order();
@@ -411,7 +425,13 @@ int main( int argc, char *argv[] ){
       y_g = &y;
       drop_v();
     }
-
+    // if opt is n, we're dropping vertex and it's neighborhood
+    // (this is the opposite of gluing
+    if( opt == 'n' ){
+      y_g = &y;
+      remove_neighbors( &log );
+    }
+    // if opt is r, we're removing every edge (once)
     else if( opt == 'r' ){
       y_g = &y;
       remove_e( &log );

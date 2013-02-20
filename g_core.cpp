@@ -115,6 +115,16 @@ int g::min_degree(){
   return min;
 }
 
+vector<int> g::neighbors(int v){
+  vector<int> neighborhood;
+  for( int i = 0; i < n; i++ ){
+    if( in_set(i,gA[v] )){
+      neighborhood.push_back(i);
+    }
+  }
+  return neighborhood;
+}
+
 
 void g::make_complement(){
   for( int i = 0; i < n; i++ ){
