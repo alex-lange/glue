@@ -15,7 +15,7 @@ using namespace std;
 
 bool * tab0;
 uint8_t * tab1;
-uint64_t * tab2;
+uint32_t * tab2;
 int * tab3;
 int num_cones;
 
@@ -451,7 +451,7 @@ int main( int argc, char *argv[] ){
       y_p = pow( 2, y.order() );
       tab0 = new bool[ y_p ];
       tab1 = new uint8_t[ y_p ];
-      tab2 = new uint64_t[ y_p ];
+      tab2 = new uint32_t[ y_p ];
       
       // get all legit cones (those with out P3 endpoints)
       num_cones = y.get_p3s2( tab0, y_p );

@@ -13,6 +13,7 @@ const uint64_t empty = 0;
 
 void set_insert( int u, vset &S );
 void set_delete( int u, vset &S );
+void set_delete( int u, uint32_t &S);
 bool in_set( int u, vset S );
 void set_cut( int u, vset &S );
 vset set_union( vset S, vset R, int arraySize );

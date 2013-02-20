@@ -573,27 +573,27 @@ void g::get_closures( uint64_t * tab, int p ){
   }
 }
 
-void g::get_closures2( uint64_t * tab, int p ){
+void g::get_closures2( uint32_t * tab, int p ){
   cur_utab = tab;
-  for( uint64_t s = 0; s < p; s++ ){
+  for( uint32_t s = 0; s < p; s++ ){
     cur_utab[s] = 0;
   }
   for( int i = 0; i < n; i++ ){
     cur_utab[ 0 | 1 << i ] = gA[i];
   }
   
-  for( uint64_t s = 3; s < p; s++ ){
+  for( uint32_t s = 3; s < p; s++ ){
     recursive_clos( s );
   }
 
   cur_utab[ p - 1 ] = p-1;
 }
 
-int g::recursive_clos( uint64_t s ){
+int g::recursive_clos( uint32_t s ){
   if( cur_utab[s] == 0 && s != 0 && s != (( 0 | 1 << n ) - 1)){
     int c = 0;
-    uint64_t sc = s;
-    uint64_t ss = s;
+    uint32_t sc = s;
+    uint32_t ss = s;
     while( !(sc & 1) ){
       c++;
       sc = sc >> 1;

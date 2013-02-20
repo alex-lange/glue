@@ -52,7 +52,7 @@ class g {
   int get_p3s( int * tab, int p );
   int get_p3s2( bool * tab, int p );
   void get_closures( uint64_t * tab, int p );
-  void get_closures2( uint64_t * tab, int p );
+  void get_closures2( uint32_t * tab, int p );
   void get_independences( int * tab, int p, int max_is = -1);
   void get_independences2( int * tab, int p, int max_is = -1);
   void get_independences3( int * tab, int p, int max_is = -1);
@@ -69,7 +69,7 @@ class g {
   void get_tri_stats();
   void recursive_is( uint64_t cur_cl, int k, int cur_v );
   void recursive_p3( uint64_t cur_cl, int cur_v );
-  int recursive_clos( uint64_t s );
+  int recursive_clos( uint32_t s );
   
 
  private:
@@ -89,7 +89,7 @@ class g {
   int optSize;
   uint8_t * cur_tab;
   bool * bcur_tab;
-  uint64_t * cur_utab;
+  uint32_t * cur_utab;
 
 };
 

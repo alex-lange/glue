@@ -27,6 +27,14 @@ void set_delete( int u, vset &S ){
   S = S & ~( shifter << u );
 }
 
+// deletes bit from set
+// Algorithm 1.4
+void set_delete( int u, uint32_t &S ){
+  //  int j = ( u % intSize );
+  // int i = u / intSize;
+  S = S & ~( shifter << u );
+}
+
 
 // removes bit from set
 void set_cut( int u, vset &S ){

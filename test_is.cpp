@@ -14,6 +14,8 @@ int * tab1;
 bool * tab2;
 int * tab3;
 uint8_t * tab4;
+uint64_t * tab5;
+uint32_t * tab6;
 int * valid_cones;
 
 int main( int argc, char *argv[] ){
@@ -58,6 +60,8 @@ int main( int argc, char *argv[] ){
     // tab1 = new uint64_t[ p ];
     tab3 = new int[ p ];
     tab4 = new uint8_t[p];
+    tab5 = new uint64_t[p];
+    tab6 = new uint32_t[p];
     
     // get all legit cones (those with out P3 endpoints)
     //int num_valid = y.get_p3s( tab0, p );
@@ -88,9 +92,9 @@ int main( int argc, char *argv[] ){
       }
     }
     cout << "Diff = " << not_same << endl;
-    cout << p << endl;
-
     cout << endl;
+  
+    ////////////////////////////////////////////////////
     // test first P3
     cout << "Testing P3" << endl;
     start = clock();
@@ -107,19 +111,6 @@ int main( int argc, char *argv[] ){
     cout << c1 << " " << c2 << endl;
 
     cout << "Sizes: " << sizeof(*tab1) << " " << sizeof(*tab2) <<  endl;
-    /*// TEST CLOSURE 1
-    start = clock();
-    y.get_closures( tab1, p );
-    stop = clock();
-    cerr << "P3 1 took " <<  ((float)(stop - start))/((float)CLOCKS_PER_SEC) << endl;
-
-    // TEST CLOSURE 2
-    start = clock();
-    y.get_closures2( tab2, p );
-    stop = clock();
-    cerr << "P3 1 took " <<  ((float)(stop - start))/((float)CLOCKS_PER_SEC) << endl;*/
-
-
     not_same = 0;
     for( int i = 0; i < p; i++ ){
       if( tab1[i] != tab2[i] ){
@@ -128,9 +119,33 @@ int main( int argc, char *argv[] ){
       }
     }
 
-
     cout << "Diff = " << not_same << endl;
     cout << p << endl;
+    cout << endl;
+
+    ///////////////////////////////////////
+
+    // TEST CLOSURE 1
+    start = clock();
+    y.get_closures( tab5, p );
+    stop = clock();
+    cerr << "Closure 1 took " <<  ((float)(stop - start))/((float)CLOCKS_PER_SEC) << endl;
+
+    // TEST CLOSURE 2
+    start = clock();
+    y.get_closures2( tab6, p );
+    stop = clock();
+    cerr << "Closure 2 took " <<  ((float)(stop - start))/((float)CLOCKS_PER_SEC) << endl;
+    cout << "Sizes: " << sizeof(*tab5) << " " << sizeof(*tab6) <<  endl;
+    not_same = 0;
+    for( int i = 0; i < p; i++ ){
+      if( tab5[i] != tab6[i] ){
+	not_same++;
+	//	cout << i << ": " << tab1[i] << " " << tab2[i] << endl;
+      }
+    }
+
+    cout << "Diff = " << not_same << endl;
     
 
     /* COUNTING CLIQUES FOR IS TESTS
