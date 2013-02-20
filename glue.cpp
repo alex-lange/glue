@@ -404,6 +404,7 @@ int main( int argc, char *argv[] ){
   //  y_order = y_graphs[0][0] - 63;
   // tab5 = new int * [ y_order ];
   
+  bool skip_degree = true;
     
   // glue!
   //for( vector<string>::iterator yit = y_graphs.begin();
@@ -443,6 +444,10 @@ int main( int argc, char *argv[] ){
       vector<int> cones;
       good.glue_graphs( d, xe, &y, cones );
       good.print_g6( &ofs );
+    }
+
+    else if( y.min_degree() < d - 1 && skip_degree ){
+      cerr << "Not gluing graph, min degree is " << y.min_degree() << endl;
     }
 
     // else, we need to actually glue
