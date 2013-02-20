@@ -50,13 +50,13 @@ class g {
   void print_g6( ostream *o = &cout );
   string to_canon_g6();
   int get_p3s( int * tab, int p );
-  int get_p3s2( int * tab, int p );
+  int get_p3s2( bool * tab, int p );
   void get_closures( uint64_t * tab, int p );
   void get_closures2( uint64_t * tab, int p );
   void get_independences( int * tab, int p, int max_is = -1);
   void get_independences2( int * tab, int p, int max_is = -1);
   void get_independences3( int * tab, int p, int max_is = -1);
-  void get_independences4( int * tab, int p, int max_is = -1);
+  void get_independences4( uint8_t * tab, int p, int max_is = -1);
   void get_is( int max_is );
   int get_num_tri_edges( int e );
 
@@ -87,7 +87,8 @@ class g {
   vector<vset> gC;
   vector< int > X, optClique;
   int optSize;
-  int * cur_tab;
+  uint8_t * cur_tab;
+  bool * bcur_tab;
   uint64_t * cur_utab;
 
 };

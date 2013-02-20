@@ -10,11 +10,10 @@
 
 using namespace std;
 
-int * tab0;
 int * tab1;
-int * tab2;
-//uint64_t * tab1;
-//uint64_t * tab2;
+bool * tab2;
+int * tab3;
+uint8_t * tab4;
 int * valid_cones;
 
 int main( int argc, char *argv[] ){
@@ -22,6 +21,8 @@ int main( int argc, char *argv[] ){
 
   // get all variables from command line
   int is = atoi( argv[1] );
+
+  uint8_t test = 0;
 
   vector<string> y_graphs;
   string g_string;
@@ -52,9 +53,11 @@ int main( int argc, char *argv[] ){
     // create tables that precompute useful data for gluing
     int p = pow( 2, order );
     tab1 = new int[ p ];
-    tab2 = new int[ p ];
+    tab2 = new bool[ p ];
+    //tab2 = new int[ p ];
     // tab1 = new uint64_t[ p ];
-    //tab2 = new uint64_t[ p ];
+    tab3 = new int[ p ];
+    tab4 = new uint8_t[p];
     
     // get all legit cones (those with out P3 endpoints)
     //int num_valid = y.get_p3s( tab0, p );
@@ -64,19 +67,32 @@ int main( int argc, char *argv[] ){
       
 
     // test first IS
-    /*
+    cout << "Testing IS" << endl;
     start = clock();
-    y.get_independences2( tab1, p, is-2 );
+    y.get_independences2( tab3, p, is-2 );
     stop = clock();
     cerr << "IS 2 took " <<  ((float)(stop - start))/((float)CLOCKS_PER_SEC) << endl;
     
     // test second IS
     start = clock();
-    y.get_independences4( tab2, p, is-2 );
+    y.get_independences4( tab4, p, is-2 );
     stop = clock();
-    cerr << "IS 4 took " <<  ((float)(stop - start))/((float)CLOCKS_PER_SEC) << endl;*/
+    cerr << "IS 4 took " <<  ((float)(stop - start))/((float)CLOCKS_PER_SEC) << endl;
+    cout << "Sizes: " << sizeof(*tab3) << " " << sizeof(*tab4) <<  endl;
 
+    int not_same = 0;
+    for( int i = 0; i < p; i++ ){
+      if( tab3[i] != tab4[i] ){
+	not_same++;
+	//	cout << i << ": " << tab1[i] << " " << tab2[i] << endl;
+      }
+    }
+    cout << "Diff = " << not_same << endl;
+    cout << p << endl;
+
+    cout << endl;
     // test first P3
+    cout << "Testing P3" << endl;
     start = clock();
     int c1 = y.get_p3s( tab1, p );
     stop = clock();
@@ -89,8 +105,8 @@ int main( int argc, char *argv[] ){
     cerr << "P3 2 took " <<  ((float)(stop - start))/((float)CLOCKS_PER_SEC) << endl;
 
     cout << c1 << " " << c2 << endl;
-    
 
+    cout << "Sizes: " << sizeof(*tab1) << " " << sizeof(*tab2) <<  endl;
     /*// TEST CLOSURE 1
     start = clock();
     y.get_closures( tab1, p );
@@ -104,11 +120,11 @@ int main( int argc, char *argv[] ){
     cerr << "P3 1 took " <<  ((float)(stop - start))/((float)CLOCKS_PER_SEC) << endl;*/
 
 
-    int not_same = 0;
+    not_same = 0;
     for( int i = 0; i < p; i++ ){
       if( tab1[i] != tab2[i] ){
 	not_same++;
-	cout << i << ": " << tab1[i] << " " << tab2[i] << endl;
+	//	cout << i << ": " << tab1[i] << " " << tab2[i] << endl;
       }
     }
 

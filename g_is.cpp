@@ -187,9 +187,9 @@ void g::get_independences2( int * tab, int p, int max_is){
 }
 
 
-void g::get_independences4( int * tab, int p, int max_is){
+void g::get_independences4( uint8_t * tab, int p, int max_is){
   int ks = max_is;
-  cur_tab = new int[p];
+  cur_tab = new uint8_t[p];
   all_independent_sets( max_is, p );
 
   for( int i = 0; i < p; i++ ){

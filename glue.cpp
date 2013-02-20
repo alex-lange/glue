@@ -13,8 +13,8 @@
 
 using namespace std;
 
-int * tab0;
-int * tab1;
+bool * tab0;
+uint8_t * tab1;
 uint64_t * tab2;
 int * tab3;
 int num_cones;
@@ -449,8 +449,8 @@ int main( int argc, char *argv[] ){
     else{
       // create tables that precompute useful data for gluing
       y_p = pow( 2, y.order() );
-      tab0 = new int[ y_p ];
-      tab1 = new int[ y_p ];
+      tab0 = new bool[ y_p ];
+      tab1 = new uint8_t[ y_p ];
       tab2 = new uint64_t[ y_p ];
       
       // get all legit cones (those with out P3 endpoints)

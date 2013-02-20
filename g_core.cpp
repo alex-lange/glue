@@ -476,14 +476,14 @@ int g::get_p3s( int * tab, int p ){
 }
 
 
-int g::get_p3s2( int * tab, int p ){
+int g::get_p3s2( bool * tab, int p ){
 
   // vector<int*> paths;
   for( int i = 0; i < p; i++ ){
     tab[i] = 1;
   }
 
-  cur_tab = tab;
+  bcur_tab = tab;
 
   // matrix for endpoints of p3
   int endpoints[n][n];
@@ -503,21 +503,21 @@ int g::get_p3s2( int * tab, int p ){
 	  endpoints[i][k] = 1;
 	  endpoints[k][i] = 1;
 	  s = (( 0 | 1 << i ) | 1 << k);
-	  cur_tab[s] = 0;
+	  bcur_tab[s] = 0;
 	  recursive_p3( s, -1 );
 	}
 	if(is_edge( j, i ) && is_edge( i, k )){
 	  endpoints[j][k] = 1;
 	  endpoints[k][j] = 1;
 	  s = (( 0 | 1 << k ) | 1 << j);
-	  cur_tab[s] = 0;
+	  bcur_tab[s] = 0;
 	  recursive_p3( s, -1 );
 	}
 	if(is_edge( i, k ) && is_edge( k, j )){
 	  endpoints[i][j] = 1;
 	  endpoints[j][i] = 1;
 	  s= (( 0 | 1 << i ) | 1 << j);
-	  cur_tab[s] = 0;
+	  bcur_tab[s] = 0;
 	  recursive_p3( s, -1 );
 	}
       }
@@ -526,7 +526,7 @@ int g::get_p3s2( int * tab, int p ){
   int count = 0;
 
   for( int i = 0; i < p; i++ ){
-    if( !cur_tab[i] ){
+    if( !bcur_tab[i] ){
       count++;
     }
   }
@@ -548,8 +548,8 @@ void g::recursive_p3( uint64_t cur_cl, int cur_v ){
     recursive_p3( cur_cl, x );
     set_insert( x, cur_cl );
   
-    if( cur_tab[ cur_cl ] == 1 ){
-      cur_tab[ cur_cl ] = 0;
+    if( bcur_tab[ cur_cl ] == 1 ){
+      bcur_tab[ cur_cl ] = 0;
       recursive_p3( cur_cl, x );
     }
     else
